@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const passport = require("passport");
 
 userController = {};
 
@@ -8,20 +9,11 @@ userController.renderFormLogin = (req, res) => {
   });
 };
 
-userController.renderUser = async (req, res) => {
-  const { username, password } = req.body;
-  const userFound = await User.findOne({ name: username });
-  if (userFound) {
-    if (await userFound.matchPassword(password)) {
-      res.render("pages/index", {
-        title: "DGB Development - Admin Panel",
-        user: userFound,
-      });
-    }
-  }
-  req.flash("error_msg", "Usuario no encontrado");
-  res.redirect("/");
-};
+userController.loginUser = passport.authenticate("login", {
+  failureRedirect: "/",
+  successRedirect: "/",
+  failureFlash: true,
+});
 
 userController.renderFormRegister = (req, res) => {
   res.render("pages/index", {
@@ -38,7 +30,7 @@ userController.addUser = async (req, res) => {
   const regex = new RegExp(/^[a-zA-Z]{0,36}$/i);
   let errors = [];
   const users = await User.find();
-  if (users.length) {
+  if (users.length > 1) {
     errors.push("Límite máximo de usuarios registrados");
   }
   if (username.length < 4 || password.length < 4) {
@@ -62,7 +54,7 @@ userController.addUser = async (req, res) => {
     });
   } else {
     //Si no hay errores almacenamos usuario y lo hacemos loguear
-    const newUser = new User({ name: username, password });
+    const newUser = new User({ username, password });
     newUser.password = await newUser.encryptPassword(password);
     try {
       await newUser.save();
@@ -73,6 +65,11 @@ userController.addUser = async (req, res) => {
       res.redirect("/user/register");
     }
   }
+};
+
+userController.logoutUser = (req, res) => {
+  req.logout();
+  res.redirect("/");
 };
 
 module.exports = userController;

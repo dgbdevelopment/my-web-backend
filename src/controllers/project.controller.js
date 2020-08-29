@@ -5,7 +5,6 @@ projectController = {};
 //TODOS LOS PROYECTOS PARA RENDERIZAR DESDE BACKEND--------
 projectController.renderProjects = async (req, res) => {
   const projects = await Project.find();
-  console.log(projects[0].links);
   res.render("pages/project", {
     title: "Admin Panel - Proyectos",
     projects,
@@ -14,7 +13,6 @@ projectController.renderProjects = async (req, res) => {
 //TODOS LOS PROYECTOS PARA PETICION DE API--------------
 projectController.getAllProjects = async (req, res) => {
   const projects = await Project.find();
-  console.log(projects[0].links);
   res.send({ projects });
 };
 //FORMULARIO PARA NUEVO PROYECTO---------------------
@@ -26,7 +24,6 @@ projectController.newProject = (req, res) => {
 };
 //AÑADIR --------------------------------
 projectController.addProject = async (req, res) => {
-  console.log(req.body);
   const {
     title,
     description,
@@ -70,6 +67,7 @@ projectController.updateProject = async (req, res) => {
     frontend,
     backend,
   } = req.body;
+  const image = req.file.filename;
   const links = [website, frontend];
   if (backend !== "") links.push(backend);
   try {
@@ -78,6 +76,7 @@ projectController.updateProject = async (req, res) => {
       description,
       languages,
       links,
+      image,
     });
     req.flash("success_msg", "Proyecto actualizado correctamente");
   } catch (err) {

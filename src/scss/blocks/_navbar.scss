@@ -1,0 +1,23 @@
+a.logo {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  & img {
+    width: 35px;
+    height: 35px;
+  }
+}
+a.user {
+  position: fixed;
+  top: 1.5rem;
+  right: 1rem;
+  color: $text-color;
+  text-decoration: none;
+  outline: none;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+  &:hover {
+    color: $primary-color;
+  }
+}

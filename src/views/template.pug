@@ -7,8 +7,7 @@ html(lang="en")
     link(rel="shortcut icon", href="/assets/img/Logo2-Negro-con-borde.svg", type="image/x-icon")
     link(rel="stylesheet", href="/css/styles.css")    
   body
-    a.logo(href="/")
-      img(src="/assets/img/logo2-blanco-con-bordes.png")    
+    include ./includes/blocks/navbar.pug
     .main-container
       if (success_msg.length > 0)
         p.success_msg=success_msg
@@ -16,6 +15,10 @@ html(lang="en")
       if (error_msg.length > 0)
         each error in error_msg
           p.error_msg=error
+            span.close ✖
+      if (error.length > 0)
+        each err in error
+          p.error_msg=err
             span.close ✖
       block main
     script(src="/js/main.js")

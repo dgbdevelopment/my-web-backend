@@ -1,25 +1,28 @@
-form#newproject.form(action="/project/addproject" method="POST")
+form#newproject.form(action="/project/addproject" method="POST" enctype="multipart/form-data")
   .form__icon
     img(src="/assets/img/logo2-blanco-con-bordes.png")
   .form__title
     h1 ★ Añadir proyecto ★
   .form__group
     label.form__label(for="title") Título:
-    input.form__user(type="text" id='title' name='title' autofocus)
+    input.form__user(type="text" id='title' name='title' autofocus required)
   .form__group
     label.form__label(for="description") Descripción:
-    textarea.form__user(id='description' name='description')
+    textarea.form__user(id='description' name='description' required)
   .form__group
     label.form__label(for="languages") Lenguajes:
-    textarea.form__user(id='languages' name='languages')
+    textarea.form__user(id='languages' name='languages' required)
   .form__group
     label.form__label(for="website") Sitio:
-    input.form__user(type="text" id='website' name='website')
+    input.form__user(type="text" id='website' name='website' required)
   .form__group
     label.form__label(for="frontend") Código Frontend:
-    input.form__user(type="text" id='frontend' name='frontend')
+    input.form__user(type="text" id='frontend' name='frontend' required)
   .form__group
     label.form__label(for="backend") Código Backend:
     input.form__user(type="text" id='backend' name='backend')
+  .form__group
+    label.form__label(for="image") Imagen:
+    input.form__user(type="file" id='image' name='image' required)
   .form__group
     input.form__submit(type="submit" value="Añadir proyecto")
