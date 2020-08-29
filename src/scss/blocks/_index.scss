@@ -1,0 +1,72 @@
+.index__container {
+  max-width: 80%;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  & .title {
+    color: $primary-color;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+}
+.index__sections {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 4rem;
+}
+
+.index__projects,
+.index__blog {
+  width: 300px;
+  margin: 2rem;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  & h2 {
+    padding-bottom: 2rem;
+    color: $primary-color;
+  }
+  & ul {
+    list-style: none;
+    & li {
+      &:first-child {
+        margin-bottom: 1rem;
+      }
+      &:last-child {
+        margin-top: 1rem;
+      }
+      & a {
+        font-size: 1.2rem;
+        text-decoration: none;
+        color: $text-color;
+        &:hover {
+          color: $primary-color;
+        }
+      }
+      & input {
+        padding: 0.5rem 0.25rem;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        height: 36px;
+        &[type="text"] {
+          font-size: 0.9rem;
+        }
+        &[type="submit"] {
+          font-size: 0.9rem;
+          width: 36px;
+          float: right;
+          background-color: $primary-color;
+          cursor: pointer;
+          &:hover {
+            background-color: $secondary-color;
+          }
+        }
+      }
+    }
+  }
+}

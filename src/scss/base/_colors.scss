@@ -1,0 +1,15 @@
+:root {
+  --bg-color: #15202b;
+  --text-color: #eeeeee;
+  --primary-color: #00adb4;
+  --secondary-color: #008288;
+  --success-color: #016335;
+  --error-color: #a7001c;
+}
+
+$bg-color: var(--bg-color);
+$text-color: var(--text-color);
+$primary-color: var(--primary-color);
+$secondary-color: var(--secondary-color);
+$success-color: var(--success-color);
+$error-color: var(--error-color);

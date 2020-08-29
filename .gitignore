@@ -1,0 +1,4 @@
+.vscode
+.env
+aux.txt
+node_modules

@@ -1,0 +1,19 @@
+.projects__container
+  each project in projects
+    .project__container
+      .project
+        h3.project__title=project.title
+        p.project__description=project.description
+        p.project__languages=project.languages
+        ul.project__links
+          each link, index in project.links
+            if link
+              li Enlace #{index+1}: &nbsp; 
+                a(href=link) #{link}
+        .project__buttons
+          form(action=`/project/edit/${project._id}` method="POST")
+            button(type="submit") Editar
+          form(action=`/project/delete/${project._id}?_method=DELETE`, method="POST")
+            input(type="hidden" name="_method" value="DELETE")
+            button(type="submit") Borrar
+

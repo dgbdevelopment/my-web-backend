@@ -1,0 +1,13 @@
+form#login.form(action="/user/login" method="POST")
+  .form__icon
+    img(src="/assets/img/logo2-blanco-con-bordes.png")
+  .form__title
+    h1 ★ Login ★
+  .form__group
+    label.form__label(for="username") Usuario:
+    input.form__user(type="text" id='username' name='username' autofocus)
+  .form__group
+    label.form__label(for="password") Contraseña:
+    input.form__user(type="password" id='password' name='password')
+  .form__group
+    input.form__submit(type="submit" value="Login")

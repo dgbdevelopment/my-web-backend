@@ -1,0 +1,8 @@
+include ../template
+  block main
+    if newproject
+      include ../includes/projects/newproject_form
+    else if projects
+      include ../includes/projects/allprojects
+    else if formdata
+      include ../includes/projects/editproject

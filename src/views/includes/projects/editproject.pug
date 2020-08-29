@@ -1,0 +1,29 @@
+form#newproject.form(action=`/project/update/${formdata._id}?_method=PUT` method="POST")
+  input(type="hidden" name="_method" value="PUT")
+  .form__icon
+    img(src="/assets/img/logo2-blanco-con-bordes.png")
+  .form__title
+    h1 ★ Editar proyecto ★
+  .form__group
+    label.form__label(for="title") Título:
+    input.form__user(type="text" id='title' name='title' autofocus value=formdata.title)
+  .form__group
+    label.form__label(for="description") Descripción:
+    textarea.form__user(id='description' name='description')=formdata.description
+  .form__group
+    label.form__label(for="languages") Lenguajes:
+    textarea.form__user(id='languages' name='languages')=formdata.languages
+  .form__group
+    label.form__label(for="website") Sitio:
+    input.form__user(type="text" id='website' name='website' value=formdata.links[0])
+  .form__group
+    label.form__label(for="frontend") Código Frontend:
+    input.form__user(type="text" id='frontend' name='frontend' value=formdata.links[1])
+  .form__group
+    label.form__label(for="backend") Código Backend:
+    if formdata.links[2]
+      input.form__user(type="text" id='backend' name='backend' value=formdata.links[2])
+    else
+      input.form__user(type="text" id='backend' name='backend')
+  .form__group
+    input.form__submit(type="submit" value="Guardar cambios")

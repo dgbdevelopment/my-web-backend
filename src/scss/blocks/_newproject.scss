@@ -1,0 +1,6 @@
+#newproject.form {
+  min-width: 320px;
+  @include laptop {
+    min-width: 450px;
+  }
+}

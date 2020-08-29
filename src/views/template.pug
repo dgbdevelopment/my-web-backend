@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title=title
+    link(rel="shortcut icon", href="/assets/img/Logo2-Negro-con-borde.svg", type="image/x-icon")
+    link(rel="stylesheet", href="/css/styles.css")    
+  body
+    a.logo(href="/")
+      img(src="/assets/img/logo2-blanco-con-bordes.png")    
+    .main-container
+      if (success_msg.length > 0)
+        p.success_msg=success_msg
+          span.close ✖
+      if (error_msg.length > 0)
+        each error in error_msg
+          p.error_msg=error
+            span.close ✖
+      block main
+    script(src="/js/main.js")
+        

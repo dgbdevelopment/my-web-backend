@@ -1,0 +1,29 @@
+include ../template
+  block main
+    if user
+      .index__container
+        h1.title Bienvenido al panel de administración de DGB Development
+        .index__sections
+          .index__projects
+            h2 Proyectos
+            ul
+              li
+                a(href="/project/newproject") Añadir proyecto                          
+              li
+                a(href="/project") Listar proyectos
+              li
+                form(action="/project/search", method="POST")
+                  input(type="text", name="search", placeholder="Buscar proyecto")
+                  input.form__button(type="submit" value="🔍")
+          .index__blog
+            h2 Blog
+            ul
+              li
+                a(href="") Añadir artículo                           
+              li
+                a(href="") Listar artículos
+    else
+      if register
+        include ../includes/users/register_form
+      else
+        include ../includes/users/login_form

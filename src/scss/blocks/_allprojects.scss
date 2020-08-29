@@ -1,0 +1,59 @@
+.projects__container {
+  width: 100%;
+  min-height: calc(100vh - 7.3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.project__container {
+  width: 340px;
+  margin: 1rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  @include laptop {
+    width: 30%;
+    font-size: 1rem;
+  }
+}
+.project {
+  width: 100%;
+  & > * {
+    margin: 1rem 0;
+  }
+  & ul {
+    list-style: none;
+    & li {
+      margin: 0.25rem 0;
+      & a {
+        text-decoration: none;
+        color: $text-color;
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}
+.project__title {
+  color: $primary-color;
+}
+.project__buttons {
+  display: flex;
+  justify-content: space-between;
+  & button {
+    padding: 0.5rem 1rem;
+    background-color: $primary-color;
+    color: $text-color;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: $secondary-color;
+    }
+  }
+}
