@@ -26,7 +26,8 @@ form#newproject.form(action=`/project/update/${formdata._id}?_method=PUT` method
     else
       input.form__user(type="text" id='backend' name='backend')
   .form__group
+    img(src=`/assets/img/imguploads/${formdata.image}`)
     label.form__label(for="image") Imagen:
-    input.form__user(type="file" id='image' name='image' required)
+    input.form__user(type="file" id='image' name='image')
   .form__group
     input.form__submit(type="submit" value="Guardar cambios")

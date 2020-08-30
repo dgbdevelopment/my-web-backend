@@ -30,7 +30,7 @@ userController.addUser = async (req, res) => {
   const regex = new RegExp(/^[a-zA-Z]{0,36}$/i);
   let errors = [];
   const users = await User.find();
-  if (users.length > 1) {
+  if (users.length >= 1) {
     errors.push("Límite máximo de usuarios registrados");
   }
   if (username.length < 4 || password.length < 4) {

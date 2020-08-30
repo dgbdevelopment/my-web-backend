@@ -7,7 +7,7 @@ a.logo {
     height: 35px;
   }
 }
-a.user {
+.user {
   position: fixed;
   top: 1.5rem;
   right: 1rem;
@@ -17,7 +17,18 @@ a.user {
   font-weight: 500;
   letter-spacing: 1px;
   transition: color 0.3s;
+  cursor: pointer;
   &:hover {
     color: $primary-color;
+  }
+}
+a.user {
+  display: none;
+  &--show {
+    display: block;
+    @extend .user;
+    right: 1rem;
+    top: 3rem;
+    font-size: 0.8rem;
   }
 }

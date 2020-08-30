@@ -1,4 +1,6 @@
 const Project = require("../models/project");
+const path = require("path");
+const fs = require("fs");
 
 projectController = {};
 
@@ -34,7 +36,14 @@ projectController.addProject = async (req, res) => {
   } = req.body;
   const links = [website, frontend];
   if (backend !== "") links.push(backend);
-  const newProject = new Project({ title, description, languages, links });
+  const image = req.file.filename;
+  const newProject = new Project({
+    title,
+    description,
+    languages,
+    links,
+    image,
+  });
   try {
     await newProject.save();
     req.flash("success_msg", "Proyecto añadido correctamente");
@@ -48,6 +57,15 @@ projectController.deleteProject = async (req, res) => {
   await Project.findByIdAndDelete(req.params.id, (err, result) => {
     if (err) req.flash("error_msg", "No se ha podido eliminar el proyecto");
     else req.flash("success_msg", "Proyecto eliminado correctamente");
+
+    fs.unlink(
+      path.resolve("src/public/assets/img/imguploads", result.image),
+      (err) => {
+        if (err) console.log(err.message);
+      }
+    );
+
+    console.log(result);
 
     res.redirect("/project");
   });
@@ -67,17 +85,40 @@ projectController.updateProject = async (req, res) => {
     frontend,
     backend,
   } = req.body;
-  const image = req.file.filename;
+  let image = undefined;
+  if (req.file) {
+    image = req.file.filename;
+  }
   const links = [website, frontend];
   if (backend !== "") links.push(backend);
   try {
-    await Project.findByIdAndUpdate(req.params.id, {
-      title,
-      description,
-      languages,
-      links,
-      image,
-    });
+    if (image) {
+      await Project.findByIdAndUpdate(
+        req.params.id,
+        {
+          title,
+          description,
+          languages,
+          links,
+          image,
+        },
+        (err, result) => {
+          fs.unlink(
+            path.resolve("src/public/assets/img/imguploads", result.image),
+            (err) => {
+              if (err) console.log(err.message);
+            }
+          );
+        }
+      );
+    } else {
+      await Project.findByIdAndUpdate(req.params.id, {
+        title,
+        description,
+        languages,
+        links,
+      });
+    }
     req.flash("success_msg", "Proyecto actualizado correctamente");
   } catch (err) {
     req.flash("error_msg", "Error al actualizar proyecto");

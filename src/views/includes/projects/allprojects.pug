@@ -10,6 +10,8 @@
             if link
               li Enlace #{index+1}: &nbsp; 
                 a(href=link) #{link}
+        .project__img
+          img(src=`/assets/img/imguploads/${project.image}`)
         .project__buttons
           form(action=`/project/edit/${project._id}` method="POST")
             button(type="submit") Editar

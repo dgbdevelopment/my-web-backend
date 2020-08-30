@@ -18,10 +18,15 @@ const { isAuth } = require("../helpers/auth");
 router.get("/project", isAuth, renderProjects);
 router.get("/project/getall", getAllProjects);
 router.get("/project/newproject", isAuth, newProject);
-router.post("/project/addproject", isAuth, addProject);
+router.post("/project/addproject", isAuth, multer.single("image"), addProject);
 router.delete("/project/delete/:id", isAuth, deleteProject);
 router.post("/project/edit/:id", isAuth, editProject);
-router.put("/project/update/:id", multer.single("image"), updateProject);
+router.put(
+  "/project/update/:id",
+  isAuth,
+  multer.single("image"),
+  updateProject
+);
 router.post("/project/search", isAuth, searchProject);
 
 module.exports = router;
