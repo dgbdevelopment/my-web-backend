@@ -44,6 +44,9 @@
     outline: none;
     border-radius: 5px;
     border: none;
+    &[type="file"] {
+      padding: 0;
+    }
   }
   & .form__submit {
     margin-top: 1rem;
@@ -62,5 +65,22 @@
     height: 120px;
     object-fit: cover;
     object-position: top;
+  }
+}
+input.form__user::-webkit-file-upload-button {
+  display: block;
+  background-color: $text-color;
+  border: 3px solid $primary-color;
+  padding: 0.5rem 0.5rem;
+  border-radius: 5px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  font-weight: 700;
+  color: black;
+  line-height: 1rem;
+  &:hover {
+    border-color: $secondary-color;
   }
 }

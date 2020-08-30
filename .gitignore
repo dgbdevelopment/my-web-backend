@@ -2,3 +2,4 @@
 .env
 auxiliar.txt
 node_modules
+src/public/assets/img/imguploads
