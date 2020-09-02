@@ -1,6 +1,6 @@
 const Project = require("../models/project");
 const path = require("path");
-const fs = require("fs");
+const fs = require("fs-extra");
 
 projectController = {};
 
@@ -54,19 +54,15 @@ projectController.addProject = async (req, res) => {
 };
 //BORRAR------------------------------------------
 projectController.deleteProject = async (req, res) => {
-  await Project.findByIdAndDelete(req.params.id, (err, result) => {
-    if (err) req.flash("error_msg", "No se ha podido eliminar el proyecto");
-    else req.flash("success_msg", "Proyecto eliminado correctamente");
-
-    fs.unlink(
-      path.resolve("src/public/assets/img/imguploads", result.image),
-      (err) => {
-        if (err) console.log(err.message);
-      }
-    );
-
+  await Project.findByIdAndDelete(req.params.id, async (err, result) => {
     console.log(result);
-
+    if (err) req.flash("error_msg", "No se ha podido eliminar el proyecto");
+    else {
+      await fs.unlink(
+        path.resolve("src/public/assets/img/imguploads", result.image)
+      );
+    }
+    req.flash("success_msg", "Proyecto eliminado correctamente");
     res.redirect("/project");
   });
 };
@@ -102,13 +98,14 @@ projectController.updateProject = async (req, res) => {
           links,
           image,
         },
-        (err, result) => {
-          fs.unlink(
-            path.resolve("src/public/assets/img/imguploads", result.image),
-            (err) => {
-              if (err) console.log(err.message);
-            }
-          );
+        async (err, result) => {
+          if (err) {
+            console.log(err.message);
+          } else {
+            await fs.unlink(
+              path.resolve("src/public/assets/img/imguploads", result.image)
+            );
+          }
         }
       );
     } else {
