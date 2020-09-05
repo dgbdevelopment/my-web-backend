@@ -1,3 +1,8 @@
 include ../template
   block main
-    h1 #{text}
+    if newarticle
+      include ../includes/articles/newarticle_form
+    else if articles
+      include ../includes/articles/allarticles
+    else if formdata
+      include ../includes/articles/editarticle

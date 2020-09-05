@@ -1,0 +1,24 @@
+form#newarticle.form.form--art(action="/article/addarticle" method="POST" enctype="multipart/form-data")
+  .form__left
+    .form__icon
+      img(src="/assets/img/logo2-blanco-con-bordes.png")
+    .form__title
+      h1 ★ Añadir artículo ★
+    .form__group
+      label.form__label(for="title") Título:
+      input.form__user(type="text" id='title' name='title' autofocus required)
+    .form__group
+      label.form__label(for="subtitle") Subtítulo:
+      input.form__user(type="text" id='subtitle' name='subtitle' required)
+    .form__group
+      label.form__label(for="description") Descripción:
+      textarea.form__user(id='description' name='description' required)
+    .form__group
+      label.form__label(for="image") Imagen:
+      input.form__user(type="file" id='image' name='image' required text="prueba")
+    .form__group
+      input.form__submit(type="submit" value="Añadir artículo")
+  .form__right
+    .form__group
+      label.form__label(for="content") Contenido:
+      textarea.form__user(id='content' name='content' required)

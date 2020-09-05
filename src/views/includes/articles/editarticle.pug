@@ -1,0 +1,26 @@
+form#newarticle.form.form--art(action=`/article/update/${formdata._id}?_method=PUT` method="POST" enctype="multipart/form-data")
+  input(type="hidden" name="_method" value="PUT")
+  .form__left
+    .form__icon
+      img(src="/assets/img/logo2-blanco-con-bordes.png")
+    .form__title
+      h1 ★ Añadir artículo ★
+    .form__group
+      label.form__label(for="title") Título:
+      input.form__user(type="text" id='title' name='title' autofocus required value=formdata.title)
+    .form__group
+      label.form__label(for="subtitle") Subtítulo:
+      input.form__user(type="text" id='subtitle' name='subtitle' required value=formdata.subtitle)
+    .form__group
+      label.form__label(for="description") Descripción:
+      textarea.form__user(id='description' name='description' required)= formdata.description
+    .form__group
+      img(src=`/assets/img/imguploads/${formdata.image}`)
+      label.form__label(for="image") Imagen:
+      input.form__user(type="file" id='image' name='image' required text="prueba")
+    .form__group
+      input.form__submit(type="submit" value="Añadir artículo")
+  .form__right
+    .form__group
+      label.form__label(for="content") Contenido:
+      textarea.form__user(id='content' name='content' required)=formdata.content

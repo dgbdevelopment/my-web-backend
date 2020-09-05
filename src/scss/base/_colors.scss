@@ -5,6 +5,7 @@
   --secondary-color: #008288;
   --success-color: #016335;
   --error-color: #a7001c;
+  --light-gray: #a7a7a7;
 }
 
 $bg-color: var(--bg-color);
@@ -13,3 +14,4 @@ $primary-color: var(--primary-color);
 $secondary-color: var(--secondary-color);
 $success-color: var(--success-color);
 $error-color: var(--error-color);
+$light-gray: var(--light-gray);

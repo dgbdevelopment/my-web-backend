@@ -1,0 +1,24 @@
+#bg.blog__content
+.blog__container
+  .blog__articles
+    h1 Artículos publicados
+    hr
+    each art in articles
+      .article__container
+        .article__img
+          img(src=`/assets/img/imguploads/${art.image}`)
+        .article__title
+          h2= art.title
+          h3= art.subtitle
+        .article__description
+          p= art.description
+        .article__footer
+          a(href="#").article__button Leer
+          form(action=`/article/edit/${art._id}` method="POST")
+            button(type="submit") Editar
+          form(action=`/article/delete/${art._id}?_method=DELETE`, method="POST")
+            input(type="hidden" name="_method" value="DELETE")
+            button(type="submit") Borrar       
+          
+          
+
