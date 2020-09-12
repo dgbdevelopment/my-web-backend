@@ -55,7 +55,6 @@ projectController.addProject = async (req, res) => {
 //BORRAR------------------------------------------
 projectController.deleteProject = async (req, res) => {
   await Project.findByIdAndDelete(req.params.id, async (err, result) => {
-    console.log(result);
     if (err) req.flash("error_msg", "No se ha podido eliminar el proyecto");
     else {
       await fs.unlink(

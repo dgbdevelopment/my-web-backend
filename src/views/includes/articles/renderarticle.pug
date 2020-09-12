@@ -1,0 +1,16 @@
+#bg.blog__content
+.blog__container
+  .blog__article
+    .article__header
+      .article__title
+        h1= article.title
+      .article__subtitle
+        h2= article.subtitle
+    .article__img
+      img(src=`/assets/img/imguploads/${article.image}` alt=`${article.title}`)
+    .article__content
+      .article__description= article.description
+      .article__main-content
+        script.
+          let template = `!{article.content}`
+          document.querySelector('.article__main-content').innerHTML = template;

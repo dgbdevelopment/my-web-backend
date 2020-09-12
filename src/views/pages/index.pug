@@ -22,6 +22,10 @@ include ../template
                 a(href="/article/newarticle") Añadir artículo                           
               li
                 a(href="/article") Listar artículos
+              li
+                form(action="/article/search", method="POST")
+                  input(type="text", name="search", placeholder="Buscar proyecto")
+                  input.form__button(type="submit" value="🔍")
     else
       if register
         include ../includes/users/register_form

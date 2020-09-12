@@ -4,7 +4,6 @@ mailController = {};
 
 mailController.main = async (req, res) => {
   const { email, message } = req.body;
-  console.log(req.body);
   const textMessage = `
   <h2>Mensaje de ${email}</h2>
   <h3>Contenido:</h3>

@@ -4,7 +4,7 @@ form#newarticle.form.form--art(action=`/article/update/${formdata._id}?_method=P
     .form__icon
       img(src="/assets/img/logo2-blanco-con-bordes.png")
     .form__title
-      h1 ★ Añadir artículo ★
+      h1 ★ Editar artículo ★
     .form__group
       label.form__label(for="title") Título:
       input.form__user(type="text" id='title' name='title' autofocus required value=formdata.title)
@@ -17,9 +17,9 @@ form#newarticle.form.form--art(action=`/article/update/${formdata._id}?_method=P
     .form__group
       img(src=`/assets/img/imguploads/${formdata.image}`)
       label.form__label(for="image") Imagen:
-      input.form__user(type="file" id='image' name='image' required text="prueba")
+      input.form__user(type="file" id='image' name='image' text="prueba")
     .form__group
-      input.form__submit(type="submit" value="Añadir artículo")
+      input.form__submit(type="submit" value="Guardar cambios")
   .form__right
     .form__group
       label.form__label(for="content") Contenido:

@@ -1,24 +1,35 @@
 #bg.blog__content
 .blog__container
+  .blog__navbar
+    .blog__order
+      #blog__select.blog__select
+        #select__title.select__title 
+          span Ordenar
+          span ▼
+        .select__option#descending
+          span(data-query=query || "") Más recientes primero
+        .select__option#ascending
+          span(data-query=query || "") Más antiguos primero
+    .blog__search
+      form.blog__form(action="/article/search" method="POST" autocomplete="off")
+        input(type="text", name="search" id="article_search" placeholder="⌕" title="Buscar artículo")
   .blog__articles
     h1 Artículos publicados
     hr
     each art in articles
       .article__container
-        .article__img
-          img(src=`/assets/img/imguploads/${art.image}`)
-        .article__title
-          h2= art.title
-          h3= art.subtitle
+        .article__top
+          .article__img
+            img(src=`/assets/img/imguploads/${art.image}`)
+          .article__title
+            h2= art.title
+            h3= art.subtitle
         .article__description
           p= art.description
         .article__footer
-          a(href="#").article__button Leer
+          a(href=`/article/render/${art._id}`).article__button Leer
           form(action=`/article/edit/${art._id}` method="POST")
             button(type="submit") Editar
           form(action=`/article/delete/${art._id}?_method=DELETE`, method="POST")
             input(type="hidden" name="_method" value="DELETE")
-            button(type="submit") Borrar       
-          
-          
-
+            button(type="submit") Borrar
