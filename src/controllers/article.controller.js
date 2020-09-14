@@ -156,6 +156,42 @@ articleController.searchArticles = async (req, res) => {
   }
 };
 
+articleController.sendResults = async (req, res) => {
+  const search = req.params.query || "";
+  const regex = new RegExp(search, "i");
+  try {
+    const articles = await Article.find({
+      $or: [
+        { title: regex },
+        { description: regex },
+        { subtitle: regex },
+        { content: regex },
+      ],
+    });
+    if (articles.length <= 0) {
+      res.send({
+        message:
+          'No se han encontrado artículos que contengan "' + search + '"',
+        articles: null,
+        query: null,
+      });
+      res.redirect("/article");
+    } else {
+      res.send({
+        articles,
+        message: 'Artículos encontrados que contienen "' + search + '"',
+        query: search,
+      });
+    }
+  } catch (err) {
+    res.send({
+      message: "Algo ha fallado al hacer la búsqueda",
+      query: null,
+      articles: null,
+    });
+  }
+};
+
 articleController.orderArticles = async (req, res) => {
   const { order, query } = req.params;
   console.log(query);
