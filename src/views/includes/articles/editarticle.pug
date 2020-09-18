@@ -15,7 +15,7 @@ form#newarticle.form.form--art(action=`/article/update/${formdata._id}?_method=P
       label.form__label(for="description") Descripción:
       textarea.form__user(id='description' name='description' required)= formdata.description
     .form__group
-      img(src=`/assets/img/imguploads/${formdata.image}`)
+      img#form__img(src=`/assets/img/imguploads/${formdata.image}`)
       label.form__label(for="image") Imagen:
       input.form__user(type="file" id='image' name='image' text="prueba")
     .form__group

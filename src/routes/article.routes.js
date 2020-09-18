@@ -14,6 +14,7 @@ const {
   searchArticles,
   orderArticles,
   sendResults,
+  orderFoundArticles,
 } = require("../controllers/article.controller");
 
 router.get("/article", renderArticles);
@@ -36,8 +37,10 @@ router.delete("/article/delete/:id", deleteArticle);
 
 router.post("/article/search", searchArticles);
 
+router.get("/article/search/:order/:query?", orderArticles);
+
 router.get("/article/searching/:query?", sendResults);
 
-router.get("/article/search/:order/:query?", orderArticles);
+router.get("/article/ordering/:order/:query?", orderFoundArticles);
 
 module.exports = router;

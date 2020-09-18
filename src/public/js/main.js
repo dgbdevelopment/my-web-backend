@@ -33,3 +33,17 @@ if (blogSelect) {
 function doQuery(query, order) {
   location.replace(location.origin + `/article/search/${order}/${query}`);
 }
+
+//Preview images
+const inputFile = document.getElementById("image");
+if (inputFile) {
+  inputFile.addEventListener("change", (e) => {
+    const img = document.getElementById("form__img");
+    const file = e.target.files[0];
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.addEventListener("load", (e) => {
+      img.setAttribute("src", e.target.result);
+    });
+  });
+}

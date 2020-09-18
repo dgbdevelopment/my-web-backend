@@ -60,9 +60,9 @@ projectController.deleteProject = async (req, res) => {
       await fs.unlink(
         path.resolve("src/public/assets/img/imguploads", result.image)
       );
+      req.flash("success_msg", "Proyecto eliminado correctamente");
+      res.redirect("/project");
     }
-    req.flash("success_msg", "Proyecto eliminado correctamente");
-    res.redirect("/project");
   });
 };
 //RECUPERAR DATOS PARA ACTUALIZAR ----------------------
@@ -107,6 +107,8 @@ projectController.updateProject = async (req, res) => {
           }
         }
       );
+      req.flash("success_msg", "Proyecto actualizado correctamente");
+      res.redirect("/project");
     } else {
       await Project.findByIdAndUpdate(req.params.id, {
         title,
@@ -114,12 +116,13 @@ projectController.updateProject = async (req, res) => {
         languages,
         links,
       });
+      req.flash("success_msg", "Proyecto actualizado correctamente");
+      res.redirect("/project");
     }
-    req.flash("success_msg", "Proyecto actualizado correctamente");
   } catch (err) {
     req.flash("error_msg", "Error al actualizar proyecto");
+    res.redirect("/project");
   }
-  res.redirect("/project");
 };
 //BUSCAR------------------------------------------------
 projectController.searchProject = async (req, res) => {

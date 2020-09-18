@@ -58,7 +58,7 @@ articleController.addArticle = async (req, res) => {
   try {
     await newArticle.save();
     req.flash("success_msg", "Artículo añadido correctamente");
-    res.redirect("/");
+    res.redirect("/article");
   } catch (err) {
     console.log(err);
   }
@@ -96,6 +96,8 @@ articleController.updateArticle = async (req, res) => {
           }
         }
       );
+      req.flash("success_msg", "Artículo actualizado correctamente");
+      res.redirect("/article");
     } else {
       await Article.findByIdAndUpdate(req.params.id, {
         title,
@@ -103,12 +105,13 @@ articleController.updateArticle = async (req, res) => {
         description,
         content,
       });
+      req.flash("success_msg", "Artículo actualizado correctamente");
+      res.redirect("/article");
     }
-    req.flash("success_msg", "Artículo actualizado correctamente");
   } catch (err) {
     req.flash("error_msg", "Error al actualizar artículo");
+    res.redirect("/article");
   }
-  res.redirect("/article");
 };
 
 articleController.deleteArticle = async (req, res) => {
@@ -118,9 +121,9 @@ articleController.deleteArticle = async (req, res) => {
       await fs.unlink(
         path.resolve("src/public/assets/img/imguploads", result.image)
       );
+      req.flash("success_msg", "Artículo eliminado correctamente");
+      res.redirect("/article");
     }
-    req.flash("success_msg", "Artículo eliminado correctamente");
-    res.redirect("/article");
   });
 };
 
@@ -231,6 +234,54 @@ articleController.orderArticles = async (req, res) => {
     } catch (err) {
       req.flash("error_msg", "Algo ha fallado al ordenar la búsqueda");
       res.redirect("/article");
+    }
+  }
+};
+
+articleController.orderFoundArticles = async (req, res) => {
+  const { order, query } = req.params;
+  console.log(query);
+  if (!query || query == "") {
+    const articles = await Article.find().sort({ createdAt: order });
+    res.send({
+      title: "DGB Development - Ordenar artículos",
+      articles,
+      query: null,
+    });
+  } else {
+    const regex = new RegExp(query, "i");
+    try {
+      const articles = await Article.find({
+        $or: [
+          { title: regex },
+          { description: regex },
+          { subtitle: regex },
+          { content: regex },
+        ],
+      }).sort({ createdAt: order });
+      if (articles.length <= 0) {
+        res.send({
+          title: "DGB Development - Artículos no encontrados",
+          message:
+            'No se han encontrado artículos que contengan "' + query + '"',
+          articles: [],
+          query,
+        });
+      } else {
+        res.send({
+          title: "DGB Development - Búsqueda de artículos",
+          articles,
+          message: 'Artículos ordenados que contienen "' + query + '"',
+          query,
+        });
+      }
+    } catch (err) {
+      res.send({
+        message: "Error del servidor al realizar la búsqueda",
+        articles: [],
+        query,
+        title: "Error en el servidor",
+      });
     }
   }
 };
