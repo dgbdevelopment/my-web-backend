@@ -6,7 +6,7 @@ projectController = {};
 
 //TODOS LOS PROYECTOS PARA RENDERIZAR DESDE BACKEND--------
 projectController.renderProjects = async (req, res) => {
-  const projects = await Project.find();
+  const projects = await Project.find().sort({ priority: 'ascending' });
   res.render("pages/project", {
     title: "Admin Panel - Proyectos",
     projects,
@@ -14,7 +14,7 @@ projectController.renderProjects = async (req, res) => {
 };
 //TODOS LOS PROYECTOS PARA PETICION DE API--------------
 projectController.getAllProjects = async (req, res) => {
-  const projects = await Project.find();
+  const projects = await Project.find().sort({ priority: 'ascending' });
   res.send({ projects });
 };
 //FORMULARIO PARA NUEVO PROYECTO---------------------
@@ -33,6 +33,7 @@ projectController.addProject = async (req, res) => {
     website,
     frontend,
     backend,
+    priority
   } = req.body;
   const links = [website, frontend];
   if (backend !== "") links.push(backend);
@@ -43,6 +44,7 @@ projectController.addProject = async (req, res) => {
     languages,
     links,
     image,
+    priority
   });
   try {
     await newProject.save();
@@ -72,6 +74,7 @@ projectController.editProject = async (req, res) => {
 };
 //ACTUALIZAR--------------------------------------
 projectController.updateProject = async (req, res) => {
+  console.log(req.body)
   const {
     title,
     description,
@@ -79,6 +82,7 @@ projectController.updateProject = async (req, res) => {
     website,
     frontend,
     backend,
+    priority = parseInt(req.body.priority),
   } = req.body;
   let image = undefined;
   if (req.file) {
@@ -96,6 +100,7 @@ projectController.updateProject = async (req, res) => {
           languages,
           links,
           image,
+          priority
         },
         async (err, result) => {
           if (err) {
@@ -115,6 +120,7 @@ projectController.updateProject = async (req, res) => {
         description,
         languages,
         links,
+        priority
       });
       req.flash("success_msg", "Proyecto actualizado correctamente");
       res.redirect("/project");

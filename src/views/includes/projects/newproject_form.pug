@@ -22,6 +22,9 @@ form#newproject.form(action="/project/addproject" method="POST" enctype="multipa
     label.form__label(for="backend") Código Backend:
     input.form__user(type="text" id='backend' name='backend')
   .form__group
+    label.form__label(for="priority") Prioridad:
+    input.form__user(type="number" id='priority' name='priority')
+  .form__group
     img#form__img
     label.form__label(for="image") Imagen:
     input.form__user(type="file" id='image' name='image' required text="prueba")

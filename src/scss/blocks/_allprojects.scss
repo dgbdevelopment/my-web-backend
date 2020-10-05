@@ -30,6 +30,7 @@
       & a {
         text-decoration: none;
         color: $text-color;
+        line-break: anywhere;
         &:hover {
           color: $primary-color;
         }

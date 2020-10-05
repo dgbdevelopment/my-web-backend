@@ -231,9 +231,34 @@
       font-style: italic;
       padding-bottom: 1em;
     }
-    & .article__main-content p {
-      line-height: 1.7;
-      margin: 1.5em 0;
+    & .article__main-content {
+      & p {
+        line-height: 1.7;
+        margin: 1.5em 0;
+      }
+      & h3 {
+        margin-top: 2em;
+      }
+      & pre {
+        background-color: black;
+        color: #6cf4f1;
+        padding: 0.5em 1.5em;
+        overflow: auto;
+        & span.comment {
+          color: $light-gray;
+        }
+      }
+      & ul {
+        margin: 0 0 0.5em 0;
+        padding-inline-start: 1em;
+        @include laptop {
+          padding-inline-start: 2em;
+        }
+        & li {
+          line-height: 1.5;
+          padding: 0.5em 0;
+        }
+      }
     }
   }
 }

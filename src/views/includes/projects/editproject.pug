@@ -26,6 +26,9 @@ form#newproject.form(action=`/project/update/${formdata._id}?_method=PUT` method
     else
       input.form__user(type="text" id='backend' name='backend')
   .form__group
+    label.form__label(for="priority") Prioridad:
+    input.form__user(type="number" id='priority' name='priority' value=formdata.priority)
+  .form__group
     img#form__img(src=`/assets/img/imguploads/${formdata.image}`)
     label.form__label(for="image") Imagen:
     input.form__user(type="file" id='image' name='image')
